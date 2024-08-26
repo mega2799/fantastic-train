@@ -45,7 +45,7 @@ jobs:
       - name: Compile MK file
         run: |
           mkdir -p ./public/report/img
-          pandoc -s --highlight-style kate --toc report/main.tex -o public/index.md
+          pandoc -s --highlight-style kate report/main.tex -o public/index.md
           cp report/img/* public/report/img
 
       # - name: Publish HTML to GitHub Pages
