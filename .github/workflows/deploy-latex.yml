@@ -18,9 +18,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Build Latex PDF and HTML
-        run: |
-          pandoc -s --highlight-style kate --toc -c latex2html.css report/main.tex -o public/index.html
+      # - name: Build Latex PDF and HTML
+      #   run: |
+      #     pandoc -s --highlight-style kate --toc -c latex2html.css report/main.tex -o public/index.html
 
       # Save the TeX Live installation to cache for future use
       - name: Save TeX Live Cache
