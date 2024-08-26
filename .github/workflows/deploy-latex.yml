@@ -18,9 +18,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # - name: Build Latex PDF and HTML
-      #   run: |
-      #     pandoc -s --highlight-style kate --toc -c latex2html.css report/main.tex -o public/index.html
+      - name: Build Latex PDF and Markdown
+        run: |
+          mkdir -p ./public/report/img
+          pandoc -s --highlight-style kate report/main.tex -o public/index.md
+          pdflatex report/main.tex
+          pdflatex report/main.tex
 
       # Save the TeX Live installation to cache for future use
       - name: Save TeX Live Cache
@@ -41,15 +44,9 @@ jobs:
         with:
           tag_name: Current
           files: main.pdf
-      
-      - name: Compile MK file
-        run: |
-          mkdir -p ./public/report/img
-          pandoc -s --highlight-style kate report/main.tex -o public/index.md
-          cp report/img/* public/report/img
 
-      # - name: Publish HTML to GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: ./public
+      - name: Publish HTML to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
